@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{admin/layout/app}">
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>操作日志</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="col-sm-9">
+                    </div>
+                    <div class="col-sm-3">
+                        <form  method="get" id="cheacform">
+                            <div class="input-group">
+                                <input type="text" th:value="${keywords}" name="keywords" placeholder="请输入名操作内容"
+                                       class="input-sm form-control"> <span class="input-group-btn">
+		                            <button type="submit" class="btn btn-sm btn-info"> 搜 索</button> </span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example"
+                           style="margin-bottom: 0;">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>操作人</th>
+                            <th>操作内容</th>
+                            <th>操作时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr class="gradeX" th:if="${not #lists.isEmpty(list)}"
+                            th:each="item:${list}">
+                            <td th:text="${item.getId()}"></td>
+                            <td th:text="${item.getAdminName()}"></td>
+                            <td th:text="${item.getContent()}"></td>
+                            <td th:text="${#dates.format(item.getCreatedAt(),'yyyy-MM-dd hh:mm:ss')}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <!-- 分页代码 -->
+                    <div class="row" th:with="list=${list}">
+                        <div th:replace="admin/layout/page::html" ></div>
+                    </div>
+                    <!-- 分页代码结束 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="my-script"  th:inline="javascript">
+
+</script>

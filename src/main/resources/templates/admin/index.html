@@ -1,0 +1,140 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title th:text="${sys.getName()}"></title>
+
+    <meta name="keywords" th:content="${sys.keywords}"/>
+    <meta name="description" th:content="${sys.description}"/>
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico"> <link th:href="@{/system/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/system/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/system/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/system/css/style.css}" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs" style="font-size:20px;">
+                                        <!--<i class="fa fa-area-chart"></i>-->
+                                        <strong class="font-bold" th:text="${sys.getName()}"></strong>
+                                    </span>
+                                </span>
+                        </a>
+                    </div>
+                    <!--<div class="logo-element">旭宓信息科技-->
+                    <!--</div>-->
+                </li>
+                <li>
+                    <a class="J_menuItem" th:href="@{/admin/zhuye}">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">主页</span>
+                    </a>
+                </li>
+                <li th:if="${not #lists.isEmpty(menus)}" th:each="item:${menus}">
+                    <a href="#">
+                        <i class="fa "  th:classappend="${item.getMenuIcon()}"></i>
+                        <span class="nav-label" th:text="${item.getMenuName()}"></span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li th:each="val:${item.getChildren()}">
+                            <a class="J_menuItem" th:href="${val.getMenuLink()}" th:text="${val.getMenuName()}"></a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <li class="dropdown">
+
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <span class="pull-right text-info" th:if="${session.admin}" th:text="${session.admin.getUserName()}" ></span><i class="fa fa-user text-success"></i> <span class="label label-info"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a  href="javascript:void(0)" th:onclick="'javascript:setPwd('+${session.admin.getAdminId()}+')'">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> 修改密码
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a th:href="@{/admin/logout}">
+                                    <div>
+                                        <i class="fa fa-qq fa-fw"></i> 退出登录
+
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe id="J_iframe" width="100%" height="100%" th:src="@{/admin/zhuye}" frameborder="0" data-id="zhuye" seamless></iframe>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+
+<!-- 全局js -->
+<script th:src="@{/system/js/jquery.min.js}"></script>
+<script th:src="@{/system/js/bootstrap.min.js}"></script>
+<script th:src="@{/system/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/system/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/system/js/plugins/layer/layer.min.js}"></script>
+
+<!-- 自定义js -->
+<script th:src="@{/system/js/hAdmin.js}"></script>
+<script type="text/javascript" th:src="@{/system/js/index.js}"></script>
+
+<!-- 第三方插件 -->
+<script th:src="@{/system/js/plugins/pace/pace.min.js}"></script>
+
+</body>
+<script>
+    function setPwd(id) {
+        layer.open({
+            type: 2,
+            title:'密码修改',
+            area: ['50%', '90%'], //宽高
+            content: '/admin/user/set-pwd/'+id
+        })
+    }
+</script>
+</html>

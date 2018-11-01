@@ -1,0 +1,102 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <title th:text="${sys.getName()+'-登录'}"> </title>
+    <meta name="keywords" th:content="${sys.getKeywords()}" />
+    <meta name="description" th:content="${sys.description}"/>
+    <link th:href="@{/system/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/system/css/font-awesome.css?v=4.4.0}" rel="stylesheet"/>
+    <link th:href="@{/system/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/system/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/system/css/login.css}" rel="stylesheet"/>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+
+</head>
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" th:action="@{/admin/login}" id="form">
+                <h4 class="no-margins">登录：</h4>
+                <p class="m-t-md" th:text="${sys.getName()}"></p>
+                <input type="text" name="user_name" id="user_name" class="form-control uname" placeholder="用户名" />
+                <input type="password" id="password" name="password" class="form-control pword m-b" placeholder="密码" />
+                <input type="checkbox" name="remember" value="-1"/> 记住密码
+                <button class="btn btn-success btn-block">登录</button>
+                <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left"th:text="${'&copy;'+sys.getCompany()}">
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script th:src="@{/system/js/jquery.min.js}"></script>
+<script th:src="@{/system/js/bootstrap.min.js}"></script>
+<script th:src="@{/system/js/plugins/layer/layer.min.js}"></script>
+<script th:src="@{/system/js/plugins/jquery-form/jquery.form.js}"></script>
+<script th:src="@{/system/js/plugins/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/system/js/plugins/validate/messages_zh.min.js}"></script>
+<script   th:inline="javascript">
+    $().ready(function () {
+
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#form").validate({
+            rules: {
+                user_name: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                },
+
+            },
+            submitHandler:function (form) {
+                var index = layer.load(1);
+                $(form).ajaxSubmit({
+                    dataType:"json",
+                    success:function (res) {
+                        if(res && res.code == 0){
+                            layer.close(index);
+                            layer.msg("登录成功");
+                            setTimeout(function(){
+                               // window.parent.location.reload(); //刷新父页面
+                                window.location.href = '/admin'
+                                // parent.layer.close(index);//关闭自身页面
+                            },500)
+                        }else{
+                            layer.msg(res.data);
+                            layer.close(index);
+                        }
+                    },
+                    error:function (response) {
+                        layer.msg("请求错误");
+                        layer.close(index);
+                    }
+                })
+            }
+        });
+
+
+    })
+
+</script>
+</html>
+
+

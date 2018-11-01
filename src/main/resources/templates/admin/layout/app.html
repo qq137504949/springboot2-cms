@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title> 后台</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"/>
+
+        <link th:href="@{/system/css/bootstrap.min.css}"  rel="stylesheet">
+        <link th:href="@{/system/css/font-awesome.css}" rel="stylesheet">
+        <link th:href="@{/system/css/plugins/dataTables/dataTables.bootstrap.css}" rel="stylesheet">
+
+        <link th:href="@{/system/css/animate.css}" rel="stylesheet">
+        <link th:href="@{/system/css/style.css}" rel="stylesheet">
+        <link th:href="@{/system/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+        <link th:href="@{/system/css/plugins/iCheck/custom.css}" rel="stylesheet">
+
+    </head>
+<body class="gray-bg">
+<div layout:fragment="content" class="wrapper wrapper-content "></div>
+</body>
+
+    <!-- 全局js -->
+
+    <script th:src="@{/system/js/jquery.min.js}"></script>
+    <script th:src="@{/system/js/bootstrap.min.js}"></script>
+    <script th:src="@{/system/js/content.js}"></script>
+    <script th:src="@{/system/layer/layer.js}"></script>
+
+    <!-- jQuery Validation plugin javascript-->
+    <script th:src="@{/system/js/plugins/validate/jquery.validate.min.js}"></script>
+    <script th:src="@{/system/js/plugins/validate/messages_zh.min.js}"></script>
+    <!-- Sweet alert -->
+    <script th:src="@{/system/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <script th:src="@{/system/js/plugins/iCheck/icheck.min.js}"></script>
+
+    <script th:src="@{/system/js/plugins/dataTables/jquery.dataTables.js}"></script>
+    <script th:src="@{/system/js/plugins/dataTables/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/system/js/plugins/jquery-form/jquery.form.js}"></script>
+
+    <script>
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+    </script>
+
+    <script layout:fragment="my-script"></script>
+    </body>
+</html>
+
+
+</html>
