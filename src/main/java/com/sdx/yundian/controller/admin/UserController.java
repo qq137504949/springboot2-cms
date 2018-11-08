@@ -57,6 +57,7 @@ public class UserController extends BaseController {
             for (ObjectError e : error) {
                 return this.outPutErr(e.getDefaultMessage());
             }
+
             return null;
         }else{//验证通过
 
