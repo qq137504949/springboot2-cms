@@ -1,6 +1,7 @@
 package com.sdx.yundian.controller.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.sdx.yundian.controller.BaseController;
 import com.sdx.yundian.entity.AdminLog;
 import com.sdx.yundian.entity.Menu;
 import com.sdx.yundian.entity.Systems;
@@ -52,10 +53,10 @@ public class MainController extends BaseController {
     }
 
     @GetMapping("/admin-log")
-    public String adminLogList(Model model, HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") Integer page){
+    public String adminLogList(Model model, HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") Integer page) {
         String keywords = request.getParameter("keywords");
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Page<AdminLog> adminLogs = adminLogService.findAllByLikeName("content",keywords,page,10,sort);
+        Page <AdminLog> adminLogs = adminLogService.findAllByLikeName("content", keywords, page, 10, sort);
         model.addAttribute("list", adminLogs);
         model.addAttribute("page", page);
         model.addAttribute("keywords", keywords);

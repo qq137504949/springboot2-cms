@@ -1,5 +1,6 @@
 package com.sdx.yundian.controller.admin;
 
+import com.sdx.yundian.controller.BaseController;
 import com.sdx.yundian.entity.Gadmin;
 import com.sdx.yundian.entity.Menu;
 import com.sdx.yundian.service.GadminService;

@@ -1,6 +1,7 @@
 package com.sdx.yundian.controller.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.sdx.yundian.controller.BaseController;
 import com.sdx.yundian.entity.Menu;
 import com.sdx.yundian.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class MenuController extends BaseController {
     public String index(Model model, HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") Integer page) {
         String keywords = request.getParameter("keywords");
         Sort sort = new Sort(Sort.Direction.ASC, "menuId");
-        Page<Menu> menus = menuService.findAllByLikeName("menuName", keywords, page, 10, sort);
+        Page <Menu> menus = menuService.findAllByLikeName("menuName", keywords, page, 10, sort);
         System.out.println(JSON.toJSONString(menus));
         model.addAttribute("list", menus);
         model.addAttribute("page", page);
@@ -36,25 +37,25 @@ public class MenuController extends BaseController {
     }
 
     @GetMapping("/add")
-    public String add(Model model){
-        List<Menu> menus = menuService.getParentId(0);
-        model.addAttribute("menus",menus);
+    public String add(Model model) {
+        List <Menu> menus = menuService.getParentId(0);
+        model.addAttribute("menus", menus);
         return "admin/menu-add";
     }
 
     @GetMapping("/edit/{menu}")
-    public String edit(Model model,Menu menu){
+    public String edit(Model model, Menu menu) {
 
-        List<Menu> menus = menuService.getParentId(0);
-        model.addAttribute("menus",menus);
-        model.addAttribute("menu",menu);
+        List <Menu> menus = menuService.getParentId(0);
+        model.addAttribute("menus", menus);
+        model.addAttribute("menu", menu);
         return "admin/menu-edit";
     }
 
     @DeleteMapping("destroy/{menu}")
     @ResponseBody
-    public String destroy(Menu menu){
-        this.adminLog("删除菜单-"+menu.getMenuName());
+    public String destroy(Menu menu) {
+        this.adminLog("删除菜单-" + menu.getMenuName());
         menuService.delete(menu);
         return this.outPutData("删除成功");
 
@@ -62,21 +63,21 @@ public class MenuController extends BaseController {
 
     @PostMapping("/save")
     @ResponseBody
-    public String save(@Valid Menu menu, BindingResult result){
-        if(result.hasErrors()){
+    public String save(@Valid Menu menu, BindingResult result) {
+        if (result.hasErrors()) {
             List <ObjectError> error = result.getAllErrors();
             for (ObjectError e : error) {
                 return this.outPutErr(e.getDefaultMessage());
             }
-        }else{
-            if(menu.getMenuId() == null){//新增
-                if( menuService.save(menu) != null){
-                    this.adminLog("添加菜单["+menu.getMenuName()+"]");
+        } else {
+            if (menu.getMenuId() == null) {//新增
+                if (menuService.save(menu) != null) {
+                    this.adminLog("添加菜单[" + menu.getMenuName() + "]");
                     return this.outPutData("保存成功");
                 }
-            }else{//更新
-                if(menuService.update(menu)!= null){
-                    this.adminLog("修改菜单["+menu.getMenuName()+"]");
+            } else {//更新
+                if (menuService.update(menu) != null) {
+                    this.adminLog("修改菜单[" + menu.getMenuName() + "]");
                     return this.outPutData("保存成功");
                 }
             }

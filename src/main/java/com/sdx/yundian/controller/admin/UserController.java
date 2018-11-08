@@ -1,6 +1,7 @@
 package com.sdx.yundian.controller.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.sdx.yundian.controller.BaseController;
 import com.sdx.yundian.entity.Gadmin;
 import com.sdx.yundian.entity.User;
 import com.sdx.yundian.service.GadminService;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "admin/user")
-public class UserController extends  BaseController{
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
