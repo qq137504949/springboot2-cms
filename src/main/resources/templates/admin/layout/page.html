@@ -14,23 +14,23 @@
                 <li class="paginate_button previous " th:class="${list.number == 0?'disabled':''}"  aria-controls="DataTables_Table_0"
                     tabindex="0" id="DataTables_Table_0_previous">
                     <a th:if="${list.number == 0}" href="javascript:void(0)">首页</a>
-                    <a th:unless="${list.number == 0}" th:href="@{${#httpServletRequest.getRequestURI()}(page=1,keywords=${keywords})}">首页</a>
+                    <a th:unless="${list.number == 0}" th:href="@{${#httpServletRequest.getRequestURL()}(page=1,keywords=${keywords})}">首页</a>
                 </li>
 
                 <li class="paginate_button " th:class="${list.number == 0?'active':''}" aria-controls="DataTables_Table_0"
                     tabindex="0">
                     <a th:unless="${list.number>0}" href="javascript:void(0)">上一页</a>
-                    <a th:if="${list.number>0}" th:href="@{${#httpServletRequest.getRequestURI()}(page=${list.number},keywords=${keywords})}">上一页</a>
+                    <a th:if="${list.number>0}" th:href="@{${#httpServletRequest.getRequestURL()}(page=${list.number},keywords=${keywords})}">上一页</a>
                 </li>
                 <li class="paginate_button " th:class="${list.totalPages ==(list.number+1)?'active':''}" aria-controls="DataTables_Table_0" tabindex="0">
                     <a th:if="${list.totalPages <=(list.number+1)}" href="javascript:void(0)">下一页</a>
-                    <a th:unless="${list.totalPages <=(list.number+1)}" th:href="@{${#httpServletRequest.getRequestURI()}(page=${list.number+2},keywords=${keywords})}">下一页</a>
+                    <a th:unless="${list.totalPages <=(list.number+1)}" th:href="@{${#httpServletRequest.getRequestURL()}(page=${list.number+2},keywords=${keywords})}">下一页</a>
                 </li>
 
                 <li class="paginate_button next " th:class="${(list.number+1)==list.totalPages?'disabled':''}" aria-controls="DataTables_Table_0" tabindex="0"
                     id="DataTables_Table_0_next">
                     <a th:if="${(list.number+1)==list.totalPages}" href="javascript:void(0)">末页</a>
-                    <a th:unless="${(list.number+1)==list.totalPages}" th:href="@{${#httpServletRequest.getRequestURI()}(page=${list.totalPages},keywords=${keywords})}">末页</a>
+                    <a th:unless="${(list.number+1)==list.totalPages}" th:href="@{${#httpServletRequest.getRequestURL()}(page=${list.totalPages},keywords=${keywords})}">末页</a>
                 </li>
             </ul>
         </div>

@@ -17,6 +17,7 @@ public class UserServiceImpl extends BaseServiceImpl <User, Integer> implements 
 
     @Override
     public User adminLogin(String userName, String password) {
+
         User user = userRepository.adminLogin(userName, Tools.Md5(password));
         if (user != null) {
             user.setAdminLoginTime(new Date());

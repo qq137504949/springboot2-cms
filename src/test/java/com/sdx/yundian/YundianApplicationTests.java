@@ -40,6 +40,8 @@ public class YundianApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+
     @Test
     public void contextLoads() {
 //        User user = new User();
@@ -57,30 +59,31 @@ public class YundianApplicationTests {
 
     //菜单测试
     @Test
-    public void menusTest(){
-        List<Menu> listMenu  = menuService.findAll();
-        List<Menu>listMenu_new = menuService.getRecursionList(listMenu);
-        redisTemplate.opsForValue().set("test","sudongxu");
+    public void menusTest() {
+        List <Menu> listMenu = menuService.findAll();
+        List <Menu> listMenu_new = menuService.getRecursionList(listMenu);
+        redisTemplate.opsForValue().set("test", "sudongxu");
         System.out.println(JSON.toJSONString(redisTemplate.opsForValue().get("test")));
     }
 
 
     //测试登录
     @Test
-    public void admin(){
-        User user = userService.adminLogin("sudongxu","sudongxu");
+    public void admin() {
+        User user = userService.adminLogin("sudongxu", "sudongxu");
         //System.out.println(JSON.toJSON(user));
     }
+
     //测试分页
     @Test
-    public void pageList(){
-        Pageable pageable = PageRequest.of(0,2);
-        Page<User> datas = userService.findPage(pageable);
-        System.out.println("总条数："+datas.getTotalElements());
-        System.out.println("总页数："+datas.getTotalPages());
+    public void pageList() {
+        Pageable pageable = PageRequest.of(0, 2);
+        Page <User> datas = userService.findPage(pageable);
+        System.out.println("总条数：" + datas.getTotalElements());
+        System.out.println("总页数：" + datas.getTotalPages());
         System.out.println(JSON.toJSON(datas));
-        for(User u : datas) {
-            System.out.println(u.getAdminId()+"===="+u.getUserName());
+        for (User u : datas) {
+            System.out.println(u.getAdminId() + "====" + u.getUserName());
         }
 //        {
 //            "first": false,
@@ -132,31 +135,26 @@ public class YundianApplicationTests {
 
     //计算页码的方法
     @Test
-    public void PageMa(){
+    public void PageMa() {
         //假设的页码
         int[] pags = new int[5];
         //被点击的页码
         int index = 6;
         //总页数
         int pagCount = 7;
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             //判读是否要变动页码，如果不大于3就为初始页码
-            if (index > 3)
-            {
+            if (index > 3) {
                 pags[i] = index - 2 + i;
                 //超出最大页码，直接从后往前赋值
                 if (pags[i] > pagCount) {
                     int reduce = 4;
-                    for (int j = 0; j < 5; j++)
-                    {
+                    for (int j = 0; j < 5; j++) {
                         pags[j] = pagCount - reduce;
                         reduce--;
                     }
                 }
-            }
-            else
-            {
+            } else {
                 pags[i] = i + 1;
             }
 
@@ -166,19 +164,19 @@ public class YundianApplicationTests {
     }
 
     @Test
-    public void TestGadmin(){
-        Pageable pageable = PageRequest.of(0,10);
-        Page<Gadmin> u = gadminService.findAllByLikeName("gname","",1,10,new Sort(Sort.Direction.DESC,"gid"));
+    public void TestGadmin() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page <Gadmin> u = gadminService.findAllByLikeName("gname", "", 1, 10, new Sort(Sort.Direction.DESC, "gid"));
 
-      // Page<Gadmin> g =  gadminService.findPageLike(new Gadmin(),pageable);
+        // Page<Gadmin> g =  gadminService.findPageLike(new Gadmin(),pageable);
 //       System.out.println(JSON.toJSONString(u));
-        for (Gadmin g:u.getContent()){
+        for (Gadmin g : u.getContent()) {
             System.out.println(g.getGname());
         }
     }
 
     @Test
-    public void TestAdmin(){
+    public void TestAdmin() {
         User user = new User();
         user.setUserName("admin");
         user.setPassword(Tools.Md5("sudongxu"));
@@ -187,7 +185,7 @@ public class YundianApplicationTests {
     }
 
     @Test
-    public void TestMenu(){
+    public void TestMenu() {
         Menu menu = new Menu();
 
         menu.setMenuName("系统管理");
@@ -195,5 +193,6 @@ public class YundianApplicationTests {
         menuService.save(menu);
 
     }
+
 
 }

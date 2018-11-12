@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
     private SystemService systemService;
 
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login(Model model) {
         Systems system = systemService.get(1);//系统设置
         model.addAttribute("sys", system);
@@ -53,6 +53,7 @@ public class LoginController extends BaseController {
         if (admin == null) {
             return this.outPutErr("用户名或密码不正确");
         }
+        System.out.println(JSON.toJSONString(admin));
         //记住密码 session 永远不失效
         if (remember == "-1") {
             request.getSession().setMaxInactiveInterval(Integer.parseInt(remember));
@@ -72,10 +73,11 @@ public class LoginController extends BaseController {
         return this.outPutData("登录成功");
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("admin");
-        return "redirect:/admin";
+        String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+        return "redirect:"+path+"/admin";
     }
 
 

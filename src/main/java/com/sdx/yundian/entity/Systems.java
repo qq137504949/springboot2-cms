@@ -18,7 +18,7 @@ public class Systems implements Serializable {
     private String ipc;
     @Column(name = "keywords",columnDefinition = "varchar(255) comment '关键字'")
     private String keywords;
-    @Column(name = "description",columnDefinition = "varchar(255) comment '描述'")
+    @Column(name = "description",columnDefinition = "text comment '描述'")
     private String description;
     @Column(name = "url",columnDefinition = "varchar(100) comment '域名'")
     private String url;
@@ -28,7 +28,7 @@ public class Systems implements Serializable {
     private String mobile;
     @Column(name = "address",columnDefinition = "varchar(200) comment '联系地址'")
     private String address;
-    @Column(name = "statistics",columnDefinition = "varchar(255) comment '统计代码'")
+    @Column(name = "statistics",columnDefinition = "text comment '统计代码'")
     private String statistics;
     @Column(name = "logo",columnDefinition = "varchar(255) comment 'LOGO'")
     private String logo;

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{admin/layout/app}">
+
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                        <button class="btn btn-white btn-xs" type="button" th:text="${userMsg.getName()}"></button>
+                        <button class="btn btn-white btn-xs" type="button" th:text="${userMsg.getMobile()}"></button>
+                        <button class="btn btn-white btn-xs" type="button" th:text="${userMsg.getEmail()}"></button>
+                    </div>
+                    <div class="text-center article-title">
+                        <h1>
+
+                        </h1>
+                    </div>
+                    <p th:utext="${userMsg.getContent()}">
+
+                    </p>
+
+                    <hr>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script layout:fragment="my-script"  th:inline="javascript">
+
+
+</script>

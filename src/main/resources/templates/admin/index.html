@@ -57,7 +57,9 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li th:each="val:${item.getChildren()}">
-                            <a class="J_menuItem" th:href="${val.getMenuLink()}" th:text="${val.getMenuName()}"></a>
+                            <!--val.getMenuLink()-->
+                            <a class="J_menuItem" th:href="${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()+#httpServletRequest.getContextPath()+'/'+val.getMenuLink()}" th:text="${val.getMenuName()}"></a>
+                            <!--<a class="J_menuItem" th:href="@{${val.getMenuLink()}}" th:text="${val.getMenuName()}"></a>-->
                         </li>
 
                     </ul>

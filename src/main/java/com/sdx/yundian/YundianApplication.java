@@ -3,7 +3,9 @@ package com.sdx.yundian;
 import com.sdx.yundian.core.BaseRepositoryFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,6 +19,11 @@ import javax.servlet.MultipartConfigElement;
 @EnableRedisHttpSession
 @EnableCaching
 public class YundianApplication {
+
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(YundianApplication.class);
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(YundianApplication.class, args);
@@ -35,5 +42,5 @@ public class YundianApplication {
         factory.setMaxRequestSize("51200KB");
         return factory.createMultipartConfig();
     }
-
+    
 }

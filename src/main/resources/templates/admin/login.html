@@ -10,7 +10,7 @@
     <meta name="keywords" th:content="${sys.getKeywords()}" />
     <meta name="description" th:content="${sys.description}"/>
     <link th:href="@{/system/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/system/css/font-awesome.css?v=4.4.0}" rel="stylesheet"/>
+    <link th:href="@{/system/css/font-awesome.css}" rel="stylesheet"/>
     <link th:href="@{/system/css/animate.css}" rel="stylesheet"/>
     <link th:href="@{/system/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/system/css/login.css}" rel="stylesheet"/>
@@ -55,7 +55,8 @@
 <script th:src="@{/system/js/plugins/validate/messages_zh.min.js}"></script>
 <script   th:inline="javascript">
     $().ready(function () {
-
+        // var url = [[${#httpServletRequest.getRequestURL()}]];
+        var url = [[${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()+#httpServletRequest.getContextPath()}]];
         var icon = "<i class='fa fa-times-circle'></i> ";
         $("#form").validate({
             rules: {
@@ -77,7 +78,7 @@
                             layer.msg("登录成功");
                             setTimeout(function(){
                                // window.parent.location.reload(); //刷新父页面
-                                window.location.href = '/admin'
+                                window.location.href = url+'/admin'
                                 // parent.layer.close(index);//关闭自身页面
                             },500)
                         }else{
