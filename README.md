@@ -1,5 +1,6 @@
 ### spring-boot2-CMS
 spring-boot2+orm[hibernate+jpa]+模板thymeleaf +缓存redis 
+2.0 新增邮件发送 新增rabbitMQ 队列 web主页提交信息自动邮件发送邮件给管理员 由于发送邮件的问题使用了异步mq
 功能模块
     图片上传 权限管理 用户管理 系统设置 日志记录等
 MIT
