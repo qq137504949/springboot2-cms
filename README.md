@@ -44,7 +44,7 @@ spring.mail.host=smtp.qq.com
 #QQ邮箱
 spring.mail.username=137504949@qq.com
 #客户端授权码
-spring.mail.password=xqcfbzqbsrcwcagi
+spring.mail.password=???
 spring.mail.protocol=smtp
 spring.mail.properties.mail.smtp.auth=true
 #端口号465或587
