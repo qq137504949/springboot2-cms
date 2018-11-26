@@ -59,3 +59,6 @@ spring.mail.properties.mail.smtp.ssl.enable=true
 spring.mail.default-encoding=utf-8
 spring.mail.from=137504949@qq.com
 ```
+
+ ![image](readme/login.png)
+  ![image](readme/index.png)
