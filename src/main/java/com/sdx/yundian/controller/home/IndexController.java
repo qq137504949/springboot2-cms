@@ -46,6 +46,8 @@ public class IndexController extends BaseController {
                 return this.outPutErr(e.getDefaultMessage());
             }
         }
+        Systems  systems = systemService.get(1);
+        userMsg.setSendEmail(systems.getEmail());//管理员后台设置的邮箱地址
         sender.sendEmail(userMsg);//发送邮件
         return this.outPutData("提交成功,我们将尽快和您联系");
 

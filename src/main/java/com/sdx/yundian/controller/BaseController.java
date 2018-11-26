@@ -3,8 +3,10 @@ package com.sdx.yundian.controller;
 import com.alibaba.fastjson.JSON;
 import com.sdx.yundian.entity.AdminLog;
 import com.sdx.yundian.entity.Message;
+import com.sdx.yundian.entity.Systems;
 import com.sdx.yundian.entity.User;
 import com.sdx.yundian.service.AdminLogService;
+import com.sdx.yundian.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,8 +28,6 @@ public class BaseController {
     private AdminLogService adminLogService;
     @Autowired
     private HttpServletRequest request;
-
-
     /**
      * 提示消息
      *

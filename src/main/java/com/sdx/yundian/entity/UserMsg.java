@@ -28,7 +28,16 @@ public class UserMsg implements Serializable {
 
     @Column(name = "created_at")
     private Date createdAt;
+    @Column(name = "send_email",columnDefinition = "VARCHAR(20) COMMENT '发送邮箱'")
+    private String sendEmail;
 
+    public String getSendEmail() {
+        return sendEmail;
+    }
+
+    public void setSendEmail(String sendEmail) {
+        this.sendEmail = sendEmail;
+    }
 
     public Integer getId() {
         return id;

@@ -1,6 +1,5 @@
 package com.sdx.yundian.controller.admin;
 
-import com.alibaba.fastjson.JSON;
 import com.sdx.yundian.controller.BaseController;
 import com.sdx.yundian.entity.UserMsg;
 import com.sdx.yundian.service.UserMsgService;
@@ -30,15 +29,15 @@ public class UserMsgController extends BaseController {
     }
 
     @GetMapping("/{userMsg}")
-    public String show(UserMsg userMsg,Model model){
-        model.addAttribute("userMsg",userMsg);
+    public String show(UserMsg userMsg, Model model) {
+        model.addAttribute("userMsg", userMsg);
         return "admin/user-msg-show";
     }
 
     @DeleteMapping("/{userMsg}")
     @ResponseBody
-    public String destroy(UserMsg userMsg){
-        this.adminLog("删除留言-"+userMsg.getName());
+    public String destroy(UserMsg userMsg) {
+        this.adminLog("删除留言-" + userMsg.getName());
         userMsgService.delete(userMsg);
         return this.outPutData("删除成功");
     }
