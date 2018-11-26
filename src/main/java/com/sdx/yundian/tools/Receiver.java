@@ -1,9 +1,6 @@
 package com.sdx.yundian.tools;
 
-import com.alibaba.fastjson.JSON;
-import com.sdx.yundian.dao.SystemRepository;
 import com.sdx.yundian.dao.UserMsgRepository;
-import com.sdx.yundian.entity.Systems;
 import com.sdx.yundian.entity.UserMsg;
 import com.sdx.yundian.service.IMailService;
 import com.sdx.yundian.service.SystemService;
@@ -18,12 +15,8 @@ public class Receiver {
 
     @Autowired
     private UserMsgRepository userMsgRepository;
-
     @Autowired
     private IMailService mailService;
-
-    @Autowired
-    private SystemService systemService;
 
     @RabbitListener(queues = "sdx.queue1")
     public String processMessage1(String msg) {
